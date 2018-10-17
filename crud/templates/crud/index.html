@@ -1,15 +1,16 @@
 {% extends 'crud/base.html' %}
 {% block body %}
-<form class="form-group">
+<form class="form-group" action="" id="crud_form">
 	{% csrf_token %}	
 	{% load static %} 
 	
 		
 	<div class="form-group">
+		       
 		<label>Name</label>
 		<div class="input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>   
-			<input type="text" id="firstname" class="form-control" style="width: 30%" required="required" placeholder="Enter Name"/>
+			<input type="text" id="firstname" name="firstname" class="form-control" style="width: 30%" required="required" placeholder="Enter Name"/>
 			
 		</div>
 	</div>
@@ -17,10 +18,12 @@
 		<label>Email</label>
 		<div class="input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>   
-			<input type="text" id="lastname" class="form-control" style="width: 30%" required="required" placeholder="Enter Email"/>
+			<input type="email" id="lastname" name="lastname" class="form-control" style="width: 30%" required="required" placeholder="Enter Email"/>
 		</div>	
 		<br />
-		<button type="button" id="create" class="btn btn-sm btn-success">Create</button>	
+		<button type="submit" id="create" class="btn btn-sm btn-success">Create</button>	
+		<button type="button" id="updatebtn" style="display: none;" data-attr="4" class="btn btn-sm btn-success">Update</button>			
+
 	</div>
 
 

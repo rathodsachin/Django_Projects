@@ -1,14 +1,20 @@
 from django.shortcuts import render, redirect
 from .models import Member
 from .forms import MemberForm
+from django.http import HttpResponse
+
 # Create your views here.
 def index(request):
     return render(request, 'crud/index.html')
 
 
-def create(request):
-    member = Member(firstname=request.POST['firstname'], lastname=request.POST['lastname'])
-    member.save()
+def create(request):    
+    member=MemberForm(request.POST)
+    if member.is_valid():
+            member.save()
+    else:
+        print("Create Not save")
+    # member.save()
     return redirect('/')
 
 def read(request):
@@ -25,7 +31,8 @@ def edit(request, id):
 def update(request, id):
     if request.method == "POST":
         member = Member.objects.get(id=id)
-        form=MemberForm(request.POST,instance=member)
+        form=MemberForm(request.POST,instance=member)          
+        print(form)
         if form.is_valid():
             form.save()
         else:

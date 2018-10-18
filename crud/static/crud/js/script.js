@@ -6,7 +6,24 @@ $(document).ready(function(){
         e.preventDefault();
         $firstname = $('#firstname').val();
         $lastname = $('#lastname').val();
+        $phone = $('#phone').val();
+        $addr = $('#addr').val();
+        $genm = ($("#radiom").is(":checked"));
+        $genf = ($("#radiof").is(":checked"));
+        $gen=true;    
+            if($genm==1)
+            {
+                $gen=true;
+            }else
+            {
+                $gen=false;
+            }
+            
+
         $id = $(this).attr('name');
+
+
+
         if($firstname == "" || $lastname == ""){
             alert("Please complete the required field");
         }else{
@@ -16,12 +33,17 @@ $(document).ready(function(){
                 data: {
                     firstname: $firstname,
                     lastname: $lastname,
-                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    phone: $phone,
+                    addr: $addr,
+                    gender:$gen,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
                 },
                 success: function(){
                     Read();
                     $('#firstname').val('');
-                    $('#lastname').val('');                    
+                    $('#lastname').val('');
+                    $('#phone').val('');
+                    $('#addr').val('');
                 }
             });
         }
@@ -33,35 +55,46 @@ $(document).ready(function(){
                     
         var fname=$(this).closest('tr').find('td:eq(0)').text();
         var lname=$(this).closest('tr').find('td:eq(1)').text();
+        var mphone=$(this).closest('tr').find('td:eq(2)').text();
+        var maddr=$(this).closest('tr').find('td:eq(3)').text();
         $('#firstname').val(fname);
         $('#lastname').val(lname);
+        $('#phone').val(mphone);
+        $('#addr').val($maddr);
         unhide();                
     
     });
 
     $(document).on('click', '#updatebtn', function(){
             document.getElementById("updatebtn").style.display = "none";    
-        document.getElementById("create").style.display = "inline";        
-    
+        document.getElementById("create").style.display = "inline";
         $firstname = $('#firstname').val();
         $lastname = $('#lastname').val();
+        $phone = $('#phone').val();
+        $addr = $('#addr').val();
 
+        
         if($firstname == "" || $lastname == ""){
             alert("Please complete the required field");
-        }else{                                        
+        }else{
             $.ajax({
                 url: 'update/' + $id,
-                type: 'POST',
+                type: 'POST',                
                 data: {
                     firstname: $firstname,
-                    lastname: $lastname,                    
+                    lastname: $lastname,
+                    phone: $phone,                    
+                    addr: $addr,
+                    gender:$gen,
                     csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
                 },
                 success: function(){
                     Read(); 
                     $('#firstname').val('');
-                    $('#lastname').val('');   
-                    alert('Updated!');
+                    $('#lastname').val('');
+                    $('#phone').val('');            
+                    $('#addr').val('');                    
+                    console.log($addr);       
                 }
             });
         }
@@ -89,6 +122,7 @@ $(document).ready(function(){
 function unhide(){
     document.getElementById("updatebtn").style.display = "inline";    
     document.getElementById("create").style.display = "none";
+
 }
 
 

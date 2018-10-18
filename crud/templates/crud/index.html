@@ -19,13 +19,35 @@
 		<div class="input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>   
 			<input type="email" id="lastname" name="lastname" class="form-control" style="width: 30%" required="required" placeholder="Enter Email"/>
-		</div>	
-		<br />
-		<button type="submit" id="create" class="btn btn-sm btn-success">Create</button>	
-		<button type="button" id="updatebtn" style="display: none;" data-attr="4" class="btn btn-sm btn-success">Update</button>			
-
+		</div>
 	</div>
 
+	<div class="form-group">
+
+		<label>Mobile</label>
+		<div class="input-group">
+			<span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+			<input type="text" id="phone" name="phone" class="form-control" style="width: 30%" required="required" placeholder="Enter Mobile Number"/>
+		</div>		
+	</div>
+
+	<div class="form-group">
+		<label>Address</label>
+		<textarea class="form-control" rows="5" id="addr"></textarea>			
+	</div>	
+
+	<div class="form-group">
+	<label>Gender</label>
+	  <div class="radio">
+      <label><input type="radio" name="optradio" id="radiom">Male</label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="optradio" id="radiof" >Female</label>
+    </div>
+    <br />
+		<button type="submit" id="create" class="btn btn-sm btn-success">Create</button>
+		<button type="button" id="updatebtn" style="display: none;" data-attr="4" class="btn btn-sm btn-success">Update</button>
+	</div>
 
   	<br />
   	<div id="result">

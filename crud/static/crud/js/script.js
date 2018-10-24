@@ -5,26 +5,25 @@ $(document).ready(function(){
     $('#crud_form').on('submit', function(e){
         e.preventDefault();
         $firstname = $('#firstname').val();
-        $lastname = $('#lastname').val();
+        $emailid = $('#emailid').val();
         $phone = $('#phone').val();
         $addr = $('#addr').val();
+        $dob = $('#dob').val();
+        $bgroup = $('#bgroup').val();
         $genm = ($("#radiom").is(":checked"));
         $genf = ($("#radiof").is(":checked"));
-        $gen=true;    
+        $gen="True";    
             if($genm==1)
             {
-                $gen=true;
+                $gen="True";
             }else
             {
-                $gen=false;
-            }
-            
+                $gen="False";
+            }            
 
         $id = $(this).attr('name');
 
-
-
-        if($firstname == "" || $lastname == ""){
+        if($firstname == "" || $emailid == ""){
             alert("Please complete the required field");
         }else{
             $.ajax({
@@ -32,18 +31,23 @@ $(document).ready(function(){
                 type: 'POST',
                 data: {
                     firstname: $firstname,
-                    lastname: $lastname,
+                    email_address: $emailid,
                     phone: $phone,
                     addr: $addr,
                     gender:$gen,
+                    dob:$dob,
+                    bgroup:$bgroup,
                     csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
                 },
                 success: function(){
                     Read();
                     $('#firstname').val('');
-                    $('#lastname').val('');
+                    $('#emailid').val('');
                     $('#phone').val('');
                     $('#addr').val('');
+                    $('#dob').val('');
+                    $('#bgroup').val('');
+                    
                 }
             });
         }
@@ -54,13 +58,31 @@ $(document).ready(function(){
         $id = $(this).attr('name');
                     
         var fname=$(this).closest('tr').find('td:eq(0)').text();
-        var lname=$(this).closest('tr').find('td:eq(1)').text();
+        var emailid=$(this).closest('tr').find('td:eq(1)').text();
         var mphone=$(this).closest('tr').find('td:eq(2)').text();
         var maddr=$(this).closest('tr').find('td:eq(3)').text();
+        var mgen=$(this).closest('tr').find('td:eq(4)').text();
+        var mdob=$(this).closest('tr').find('td:eq(5)').text();
+        var bgroup=$(this).closest('tr').find('td:eq(6)').text();
+        var dt = new Date(mdob);         
+        dt.setDate(dt.getDate() + 1);
+
         $('#firstname').val(fname);
-        $('#lastname').val(lname);
+        $('#emailid').val(emailid);
         $('#phone').val(mphone);
-        $('#addr').val($maddr);
+        $('#addr').val(maddr);
+        $('#dob').val(dt.toISOString().split('T')[0]);
+        $('#bgroup').val(bgroup);
+
+
+
+        if(mgen=="Male")
+        {
+            $("#radiom").prop("checked", true);
+        }else
+        {
+            $("#radiof").prop("checked", true);
+        }
         unhide();                
     
     });
@@ -69,12 +91,25 @@ $(document).ready(function(){
             document.getElementById("updatebtn").style.display = "none";    
         document.getElementById("create").style.display = "inline";
         $firstname = $('#firstname').val();
-        $lastname = $('#lastname').val();
+        $emailid = $('#emailid').val();
         $phone = $('#phone').val();
         $addr = $('#addr').val();
+        $dob = $('#dob').val();
+        $genm = ($("#radiom").is(":checked"));
+        $genf = ($("#radiof").is(":checked"));  
+        $bgroup = $('#bgroup').val();
+      
+        $gen="True";    
+            if($genm==1)
+            {
+                $gen="True";
+            }else
+            {
+                $gen="False";
+            }   
 
         
-        if($firstname == "" || $lastname == ""){
+        if($firstname == "" || $emailid == ""){
             alert("Please complete the required field");
         }else{
             $.ajax({
@@ -82,19 +117,22 @@ $(document).ready(function(){
                 type: 'POST',                
                 data: {
                     firstname: $firstname,
-                    lastname: $lastname,
+                    email_address: $emailid,
                     phone: $phone,                    
                     addr: $addr,
                     gender:$gen,
+                    dob:$dob,
+                    bgroup:$bgroup,
                     csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
                 },
                 success: function(){
                     Read(); 
                     $('#firstname').val('');
-                    $('#lastname').val('');
+                    $('#emailid').val('');
                     $('#phone').val('');            
-                    $('#addr').val('');                    
-                    console.log($addr);       
+                    $('#addr').val('');
+                    $('#dob').val('');
+                    $('#bgroup').val('');
                 }
             });
         }

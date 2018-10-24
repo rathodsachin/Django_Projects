@@ -4,9 +4,10 @@
 	{% csrf_token %}	
 	{% load static %} 
 	
+	
 		
 	<div class="form-group">
-		       
+		       		      
 		<label>Name</label>
 		<div class="input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>   
@@ -18,7 +19,7 @@
 		<label>Email</label>
 		<div class="input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>   
-			<input type="email" id="lastname" name="lastname" class="form-control" style="width: 30%" required="required" placeholder="Enter Email"/>
+			<input type="email" id="emailid" name="emailid" class="form-control" style="width: 30%" required="required" placeholder="Enter Email"/>
 		</div>
 	</div>
 
@@ -43,16 +44,35 @@
     </div>
     <div class="radio">
       <label><input type="radio" name="optradio" id="radiof" >Female</label>
+    </div>    
+	</div>
+
+	<div class="form-group">
+      <label>Date of Birth</label>
+      <div class="input-group">
+			<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>   
+      		<input type="date" class="form-control" id="dob" placeholder="Date of Birth" style="width: 30%">
+      </div>      
     </div>
-    <br />
+
+    <div class="form-group">
+      <label for="bgroup">Blood Group (select one):</label>
+      <select class="form-control" id="bgroup" style="width: 30%">
+        <option>A</option>
+        <option>B</option>
+        <option>AB</option>
+        <option>O</option>
+      </select>
+      <br />
 		<button type="submit" id="create" class="btn btn-sm btn-success">Create</button>
 		<button type="button" id="updatebtn" style="display: none;" data-attr="4" class="btn btn-sm btn-success">Update</button>
-	</div>
+    </div>
+
 
   	<br />
   	<div id="result">
 	</div>
-	      
+
 </form>
 
 

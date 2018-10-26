@@ -1,77 +1,96 @@
 {% extends 'crud/base.html' %}
 {% block body %}
-<form class="form-group" action="" id="crud_form">
-	{% csrf_token %}	
-	{% load static %} 
-	
-	
-		
-	<div class="form-group">
-		       		      
-		<label>Name</label>
-		<div class="input-group">
-			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>   
-			<input type="text" id="firstname" name="firstname" class="form-control" style="width: 30%" required="required" placeholder="Enter Name"/>
-			
-		</div>
-	</div>
-	<div class="form-group">
-		<label>Email</label>
-		<div class="input-group">
-			<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>   
-			<input type="email" id="emailid" name="emailid" class="form-control" style="width: 30%" required="required" placeholder="Enter Email"/>
-		</div>
-	</div>
 
-	<div class="form-group">
+<form class="form-group" action="" id="crud_form" method="POST">
 
-		<label>Mobile</label>
-		<div class="input-group">
-			<span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-			<input type="text" id="phone" name="phone" class="form-control" style="width: 30%" required="required" placeholder="Enter Mobile Number"/>
-		</div>		
-	</div>
+    {% csrf_token %}    
+    {% load static %} 
+    
+        
+    <div class="form-group" id="modal-empl">
 
-	<div class="form-group">
-		<label>Address</label>
-		<textarea class="form-control" rows="5" id="addr"></textarea>			
-	</div>	
 
-	<div class="form-group">
-	<label>Gender</label>
-	  <div class="radio">
-      <label><input type="radio" name="optradio" id="radiom">Male</label>
+        {% for field in form %}
+        <div class="form-group">
+            <div class="fieldWrapper">
+                {{ field.errors }}
+                {{ field.label_tag }} 
+                {{ field }}
+            </div>
+        </div>
+        {% endfor %}
+
+
+
+<!-- 
+        <label for="id_firstname">Name</label>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>   
+            <input type="text" id="id_firstname" name="firstname" class="form-control" style="width: 30%" required="required" placeholder="Enter Name" />                
+        </div>
+    
+    
+        <label for="id_email_address">Email</label>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>   
+            <input type="email" id="id_email_address" name="emailid" class="form-control" style="width: 30%" required="required" placeholder="Enter Email"/>            
+            {{ form.id_email_address.errors }}
+        </div>
+    
+
+    
+
+        <label for="id_phone">Mobile</label>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+            <input type="text" id="id_phone" name="phone" class="form-control" style="width: 30%" required="required" placeholder="Enter Mobile Number"/>
+        </div>      
+    
+
+    
+        <label for="id_addr">Address</label>
+        <textarea class="form-control" rows="5" id="id_addr"></textarea>           
+    
+
+    
+    <label>Gender</label>
+      <div class="radio">
+      <label><input type="radio" name="optradio" id="id_gender_1">Male</label>
     </div>
     <div class="radio">
-      <label><input type="radio" name="optradio" id="radiof" >Female</label>
+      <label><input type="radio" name="optradio" id="id_gender_2" >Female</label>
     </div>    
-	</div>
+    
 
-	<div class="form-group">
-      <label>Date of Birth</label>
-      <div class="input-group">
-			<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>   
-      		<input type="date" class="form-control" id="dob" placeholder="Date of Birth" style="width: 30%">
+    
+      <label for="id_dob">Date of Birth</label>
+      <div class="input-group">      
+            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>   
+            <input type="date" class="form-control" id="id_dob" placeholder="Date of Birth" style="width: 30%">
+            {{ form.dob.errors }}
       </div>      
-    </div>
+    
 
-    <div class="form-group">
-      <label for="bgroup">Blood Group (select one):</label>
-      <select class="form-control" id="bgroup" style="width: 30%">
+    
+      <label for="id_bgroup">Blood Group (select one):</label>
+      <select class="form-control" id="id_bgroup" style="width: 30%">
         <option>A</option>
         <option>B</option>
         <option>AB</option>
         <option>O</option>
-      </select>
-      <br />
-		<button type="submit" id="create" class="btn btn-sm btn-success">Create</button>
-		<button type="button" id="updatebtn" style="display: none;" data-attr="4" class="btn btn-sm btn-success">Update</button>
+      </select> 
+ -->      
+
+    <br />
+        <button type="submit" id="create" class="btn btn-sm btn-success js-create">Create</button>
+        <button type="button" id="updatebtn" style="display: none;" data-attr="4" class="btn btn-sm btn-success js-update">Update</button>
+
+
     </div>
 
-
-  	<br />
-  	<div id="result">
-	</div>
+    <br />
+    <div id="result">
+    </div>    
 
 </form>
 

@@ -5,14 +5,14 @@ import datetime
 # Create your models here.
 
 class Member(models.Model):
-	firstname = models.CharField(max_length=40)
-	email_address = models.EmailField(max_length=40,unique=True)
+	firstname = models.CharField(max_length=40,help_text='Enter Name.')
+	email_address = models.EmailField(max_length=40,unique=True,help_text='Enter Email.')
 	phone = PhoneNumberField()
 	addr= models.TextField()	
 	dob = models.DateField(default=datetime.date.today)	
 	
 	GENDER_CHOICES = ((True, 'Male',), (False, 'Female',))  
-	gender = models.BooleanField(choices=GENDER_CHOICES)
+	gender = models.BooleanField(choices=GENDER_CHOICES,default=True)
 
 	BGROUP_CHOICES = (
     ('A','A'),

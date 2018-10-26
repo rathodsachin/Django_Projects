@@ -2,23 +2,43 @@ from django.shortcuts import render, redirect
 from .models import Member
 from .forms import MemberForm
 from django.http import HttpResponse
+from django.http import JsonResponse
+from django.shortcuts import render_to_response
+from django.template.loader import render_to_string
+
+
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'crud/index.html')
-
-
-def create(request):    
     if request.method == "POST":
-        member=MemberForm(request.POST)
+        form=MemberForm(request.POST)        
+        return render(request, 'crud/index.html', {'form': form})
+    else:
+        form=MemberForm()
+        return render(request, 'crud/index.html', {'form': form})
+
+
+def create(request):   
+    # import pdb;pdb.set_trace() 
+    data = dict()
+    if request.method == "POST":
+        form=MemberForm(request.POST)
         #print(member)
-        if member.is_valid():
-            member.save()
+        if form.is_valid():
+            form.save()                    
+            data['form_is_valid'] = True
         else:
-            print("Create Not save")                        
-            print(member.errors)        
-        return redirect('/')
+            data['form_is_valid'] = False
+            print(form.errors)
+            context = {'form': form}
+            data['html_form'] = render_to_string('crud/index.html',
+            context,
+            request=request,
+            )
+        return JsonResponse(data)            
+        
+
 
 def read(request):
     members = Member.objects.all()
@@ -32,16 +52,24 @@ def edit(request, id):
 
 
 def update(request, id):
+    data = dict()
     if request.method == "POST":
         member = Member.objects.get(id=id)
         form=MemberForm(request.POST,instance=member)          
-        #print(form)
+        #print(form) 
+
         if form.is_valid():            
             form.save()
+            data['form_is_valid'] = True
         else:
+            data['form_is_valid'] = False
             print(form.errors)
-            print("Not save")
-    return redirect('/')
+            context = {'form': form}
+            data['html_form'] = render_to_string('crud/index.html',
+            context,
+            request=request,
+            )
+        return JsonResponse(data)
 
 
 def delete(request, id):

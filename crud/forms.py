@@ -12,6 +12,7 @@ class MemberForm(forms.ModelForm):
         fields = ['firstname', 'email_address','phone','addr','gender','dob','bgroup']
         widgets = {'gender': forms.RadioSelect()
         }
+        
 
     def clean_dob(self):
         data = self.cleaned_data['dob']
